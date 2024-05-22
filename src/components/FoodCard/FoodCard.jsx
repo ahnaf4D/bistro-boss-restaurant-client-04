@@ -4,10 +4,12 @@ import useAuth from '../../hooks/useAuth';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
+import useCart from '../../hooks/useCart';
 const FoodCard = ({ food }) => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
+  const { refetch } = useCart();
   const handleAddToCart = (food) => {
     if (user && user?.email) {
       console.log(user?.email, food);
@@ -28,6 +30,8 @@ const FoodCard = ({ food }) => {
             showConfirmButton: false,
             timer: 1000,
           });
+          // refetch the cart
+          refetch();
         }
       });
     } else {
