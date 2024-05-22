@@ -1,11 +1,16 @@
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { FaShoppingCart } from 'react-icons/fa';
+
 import Swal from 'sweetalert2';
+import useCart from '../../../hooks/useCart';
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+  const { cart } = useCart(); // Destructure cart and isLoading
+
   const navOptions = (
     <>
       <li>
@@ -20,8 +25,17 @@ const Navbar = () => {
       <li>
         <Link to='/order-food'>Order Food</Link>
       </li>
+      <li>
+        <Link to='/shopping-cart' className='relative'>
+          <FaShoppingCart className='text-2xl' />
+          <div className='badge badge-warning font-medium absolute top-0'>
+            {cart.length}
+          </div>
+        </Link>
+      </li>
     </>
   );
+
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -38,6 +52,7 @@ const Navbar = () => {
         });
       });
   };
+
   return (
     <div>
       <div className='navbar sticky z-40  text-white bg-black bg-opacity-60 '>

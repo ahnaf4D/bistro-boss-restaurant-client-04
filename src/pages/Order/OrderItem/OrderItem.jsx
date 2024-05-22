@@ -6,7 +6,6 @@ import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 
 const OrderItem = ({ items }) => {
-  console.log(items);
   const itemsPerPage = 6;
   const pages = Math.ceil(items.length / itemsPerPage);
   const pagination = {

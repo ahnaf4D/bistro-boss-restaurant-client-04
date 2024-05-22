@@ -23,7 +23,7 @@ const Login = () => {
           title: 'Login Success',
           icon: 'success',
         });
-        navigate(location?.state ? `${location.state}` : '/');
+        navigate(from, { replace: true });
       })
       .catch(() => {
         Swal.fire({
